@@ -7,7 +7,7 @@ This repository contains code necessary to run DEGAT model.DEGAT is an end-to-en
 
 ## Folder Specification
 
-### data(Including the data set used in the experiment)
+### data(Including the datasets used in the experiment)
 RPPA_data_of_BRCA.csv: This file is the patient's protein expression data, this file could be downloaded from TCGA database.
 
 clinical_data_of_BRCA.csv: This file are the patient's clinical records, which contain the patient's diagnosis, stage of cancer and subtype of BRCA, etc.this file could be downloaded from TCGA database.
@@ -23,9 +23,9 @@ gat.py: This file describes a graph attention network.
 
 models.py: This file contains the overall network architecture of DEGAT, including data processing, diffusion module and graph classifier.
 
-ablation_experiments.py : This file contains the ablation experiments.
+ablation_experiments.py : This file shows how the ablation experiment was performed.
 
-sparsification_curve.py : This file trains the KDGN model.
+sparsification_curve.py : This file shows the effect of different parameters on sparsification.
 
 ## Requirements
 - pandas: 1.3.0
