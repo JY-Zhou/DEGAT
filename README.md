@@ -3,18 +3,18 @@
 DEGAT : Diffusion-Enhanced Graph Attention Network for Cancer Type Classfication
 
 ## Overview
-This repository contains code necessary to run KDGN model. KDGN is an end-to-end model mainly based on graph convolutional networks (GCN) and attention nerual networks. Paitent history information and medicine knowledge are utilized to provide safe and personalized recommendation of medication combination. KDGN is tested on real-world clinical dataset [MIMIC-III](https://mimic.physionet.org/) and outperforms several state-of-the-art deep learning methods in heathcare area in all effectiveness measures.
+This repository contains code necessary to run DEGAT model.DEGAT is an end-to-end model mainly based on graph attention networks (GAT). Protein expression information and proteins interaction information are utilized to predict the type or the subtype of cancer. KEGAT is tested on real-world clinical database [TCGA](https://www.cancer.gov/ccg/research/genome-sequencing/tcga) and outperforms several machine learning and deep learning methods in most effectiveness measures.
 
 ## Folder Specification
 
 ### data(Including the data set used in the experiment)
-PRESCRIPTIONS.csv, DIAGNOSES_ICD.csv, PROCEDURES_ICD.csv: These three files are the patient's clinical records, which contain the patient's diagnosis, procedure and medication information, etc.
+RPPA_data_of_BRCA.csv: This file is the patient's protein expression data, this file could be downloaded from TCGA database.
 
-drug-atc.csv: this is a CID-ATC file, which gives the mapping from CID code to detailed ATC code. This file is obtained from https://github.com/sjy1203/GAMENet.
+clinical_data_of_BRCA.csv: This file are the patient's clinical records, which contain the patient's diagnosis, stage of cancer and subtype of BRCA, etc.this file could be downloaded from TCGA database.
 
-drugbank_drugs_info.csv: drug information table downloaded from drugbank here https://www.dropbox.com/s/angoirabxurjljh/drugbank_drugs_info.csv?dl=0, which is used to map drug name to drug SMILES string.
+ppi_network_of_BRCA: This file describe the protein-protein interaction. this file could be downloaded from STRING database.（https://string-db.org/）
 
-drug-DDI.csv: this file contains the drug DDI information. The file could be downloaded from https://drive.google.com/file/d/1mnPc0O0ztz0fkv3HF-dpmBb8PLWsEoDz/view?usp=sharing
+
 
 ### codes
 layers.py: This file describes a graph neural network.
@@ -29,9 +29,8 @@ util.py: This file contains some defined functions.
 
 ## Requirements
 - pandas: 1.3.0
-- dill: 0.3.4
-- torch: 1.11.0+cu111
-- rdkit: 2021.03.4
+- tensorflow: 2.13.0
 - scikit-learn: 0.24.2
 - numpy: 1.21.1
-- Python >=3.5
+- Python 3.7
+- matplotlib 3.3.0
