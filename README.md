@@ -34,3 +34,5 @@ sparsification_curve.py : This file shows the effect of different parameters on 
 - numpy: 1.21.1
 - Python 3.7
 - matplotlib 3.3.0
+- seaborn 0.12
+- scipy 1.19.2
