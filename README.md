@@ -23,7 +23,6 @@ gat.py: This file describes a graph attention network.
 
 models.py: This file contains the overall network architecture of DEGAT, including data processing, diffusion module and graph classifier.
 
-ablation_experiments.py : This file shows how the ablation experiment was performed.
 
 sparsification_curve.py : This file shows the effect of different parameters on sparsification.
 
