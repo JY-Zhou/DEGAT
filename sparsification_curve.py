@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[16]:
 
 
 import pandas as pd
@@ -28,16 +25,14 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras import activations, regularizers, constraints, initializers
-from spektral.layers import GCNConv
-from spektral.utils import normalized_adjacency
 import tensorflow.keras.backend as K
 tf.keras.utils.set_random_seed(123)
 tf.random.set_seed(123)
-from spektral.layers import GATConv
 
-ppi=pd.read_csv('C:/Users/A/Desktop/乳腺癌亚型/ppi.csv')
-expression= pd.read_csv('C:/Users/A/Desktop/乳腺癌亚型/RPPA_RBN.csv')
-cancertype= pd.read_csv('C:/Users/A/Desktop/乳腺癌亚型/BRCA-phe.csv')
+
+ppi=pd.read_csv('data/BRCA/ppi_network_of_BRCA.csv')
+expression= pd.read_csv('data/BRCA/RPPA_data_of_BRCA.csv')
+cancertype= pd.read_csv('data/BRCA/clinical_data_of_BRCA.csv')
 cancertype=cancertype[['patient','BRCA_Subtype_PAM50']]
 expression=expression.transpose()
 
@@ -48,16 +43,12 @@ expression["Sample_description"] = expression["Sample_description"].apply(lambda
 expression
 
 
-# In[17]:
-
 
 def Diffusion(A: sp.csr_matrix, alpha: float, eps: float):
     N = A.shape[0]
 
-    #自循环矩阵A
     A_loop = sp.eye(N) + A
 
-    #度矩阵D与转移矩阵A*D逆
     D_loop_vec = A_loop.sum(0).A1
     D_loop_vec_invsqrt = 1 / np.sqrt(D_loop_vec)
     D_loop_invsqrt = sp.diags(D_loop_vec_invsqrt)
@@ -76,19 +67,11 @@ def Diffusion(A: sp.csr_matrix, alpha: float, eps: float):
     
     return T_S
 
-
-# In[18]:
-
-
 data= cancertype.merge(expression, left_on='patient', right_on='Sample_description')
 data.dropna()
 columns=data.columns.tolist()[3:]
 columns
 ','.join(columns)
-
-
-# In[19]:
-
 
 data1=data[columns]
 corr = data1.corr()
@@ -105,25 +88,11 @@ for i in range(0,len(ppi)):
 
 adjoint
 
-
-# In[20]:
-
-
 sparse_matrix1 = csr_matrix(adjoint.values)
 x=Diffusion(sparse_matrix1,0.4,0.005)
 df=pd.DataFrame(x)
-df
-
-
-# In[21]:
-
-
 x2=df.applymap(lambda x: 1 if x != 0 else 0)
 x2
-
-
-# In[22]:
-
 
 x0=adjoint.applymap(lambda x: 1 if x != 0 else 0)
 sns.heatmap(x0, cmap='Blues', cbar_kws={'label': 'Value'})
@@ -132,19 +101,11 @@ plt.xlabel('Columns')
 plt.ylabel('Rows')
 plt.show()
 
-
-# In[23]:
-
-
 sns.heatmap(x2, cmap='Blues', cbar_kws={'label': 'Value'})
 plt.title('Adjacency Matrix after diffusion')
 plt.xlabel('Columns')
 plt.ylabel('Rows')
 plt.show()
-
-
-# In[24]:
-
 
 labels =data["BRCA_Subtype_PAM50"]
 label_mapping = {'LumA': 0, 'Basal': 1, 'Her2': 2, 'LumB':3,'Normal':4}
@@ -154,18 +115,10 @@ scaler = StandardScaler()
 x= scaler.fit_transform(x)
 x.shape
 
-
-# In[25]:
-
-
 y=data['numeric_label']
 from tensorflow.keras.utils import to_categorical
 y_encoded = to_categorical(y)
 y_encoded.shape
-
-
-# In[26]:
-
 
 X_train, X_test, y_train, y_test = train_test_split(x, y_encoded, test_size=0.2, random_state=42)
 
@@ -186,9 +139,6 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 model.summary()
 
 
-# In[27]:
-
-
 xtrain= np.expand_dims(X_train, axis=2)
 print("x train",xtrain.shape)
 
@@ -202,14 +152,7 @@ adjoint3 = np.repeat(adjoint1,len(xtest),0)
 print("A",adjoint2.shape)
 
 
-# In[28]:
-
-
 model.fit([xtrain, adjoint2], y_train, batch_size=32, epochs=100, validation_split=0.2)
-
-
-# In[29]:
-
 
 y_pred=model.predict([xtest, adjoint3])
 
@@ -233,9 +176,6 @@ print("F1 Score:", f1)
 
 mcc = matthews_corrcoef(y_test, y_pred)
 print("MCC:", mcc)
-
-
-# In[30]:
 
 
 plt.rcParams['font.family'] = ['Microsoft YaHei']
