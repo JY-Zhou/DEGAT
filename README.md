@@ -12,11 +12,11 @@ RPPA_data_of_BRCA.csv: This file is the patient's protein expression data, this 
 
 clinical_data_of_BRCA.csv: This file are the patient's clinical records, which contain the patient's diagnosis, stage of cancer and subtype of BRCA, etc.this file could be downloaded from TCGA database.
 
-ppi_network_of_BRCA.csv: This file describe the protein-protein interaction of BRCA. this file could be downloaded from STRING database.（https://string-db.org/）
+ppi_network_of_BRCA.csv: This file describe the protein-protein interaction of BRCA. this file could be downloaded from STRING database.https://string-db.org
 
 RPPA_data_of_pancancer.csv: This file is the patient's protein expression data, this file could be downloaded from TCGA database.
 
-ppi_network_of_pancancer.csv: This file describe the protein-protein interaction of pancancer. this file could be downloaded from STRING database.（https://string-db.org/）
+ppi_network_of_pancancer.csv: This file describe the protein-protein interaction of pancancer. this file could be downloaded from STRING database.https://string-db.org
 
 ### codes
 gat.py: This file describes a graph attention network.
