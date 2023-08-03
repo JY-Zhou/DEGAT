@@ -3,7 +3,7 @@
 DEGAT : Diffusion-Enhanced Graph Attention Network for Cancer Type Classfication
 
 ## Overview
-This repository contains code necessary to run DEGAT model.DEGAT is an end-to-end model mainly based on graph attention network (GAT). Protein expression information and proteins interaction information are utilized to predict the type or the subtype of cancer. DEGAT is tested on real-world cancer database "The Cancer Genome Atlas Program"(TCGA)https://www.cancer.gov/ccg/research/genome-sequencing/tcga and outperforms several machine learning and deep learning methods in most of the metrics.
+This repository contains code necessary to run DEGAT model.DEGAT is an end-to-end model mainly based on graph attention network (GAT). Protein expression information and protein-protein interaction information are utilized to predict the type or the subtype of cancer. DEGAT is tested on real-world cancer database "The Cancer Genome Atlas Program"(TCGA)https://www.cancer.gov/ccg/research/genome-sequencing/tcga and outperforms several machine learning and deep learning methods in most of the metrics.
 
 ## Folder Specification
 
@@ -23,12 +23,16 @@ gat.py: This file describes a graph attention network.
 
 models.py: This file contains the overall network architecture of DEGAT, including data processing, diffusion module and graph classifier.
 
+best_model.h5:This file is our best-trained model.
+
+best_model.py:You can use this file to run best_model.h5.
 
 sparsification_curve.py : This file shows the effect of different parameters on sparsification.
 
 ## Requirements
 - pandas: 1.3.0
 - tensorflow: 2.13.0
+- Keras 2.3.1
 - scikit-learn: 0.24.2
 - numpy: 1.21.1
 - Python 3.7
