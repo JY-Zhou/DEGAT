@@ -1,5 +1,3 @@
-
-
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras import backend as K
@@ -215,7 +213,6 @@ from tensorflow.keras.layers import Layer
 
 class Conv(Layer):
     
-
     def __init__(self, **kwargs):
         super().__init__(**{k: v for k, v in kwargs.items() if is_keras_kwarg(k)})
         self.supports_masking = True
