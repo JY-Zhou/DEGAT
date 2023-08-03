@@ -1,6 +1,3 @@
-
-
-
 import pandas as pd
 import numpy as np
 import math
@@ -152,4 +149,3 @@ plt.xlabel("ε(log scale)")
 plt.ylabel("number of edges")
 plt.legend()
 plt.show()
-
