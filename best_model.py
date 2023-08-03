@@ -1,6 +1,6 @@
 
 import sys
-sys.path.append("the filepath you put gat.py on") 
+sys.path.append("your filepath/gat.py") 
 import gat
 from gat import GATConv
 
