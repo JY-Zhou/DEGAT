@@ -1,9 +1,7 @@
-
 import sys
 sys.path.append("your filepath/gat.py") 
 import gat
 from gat import GATConv
-
 
 import pandas as pd
 import numpy as np
@@ -32,7 +30,6 @@ from tensorflow.keras import activations, regularizers, constraints, initializer
 import tensorflow.keras.backend as K
 tf.keras.utils.set_random_seed(123)
 tf.random.set_seed(123)
-
 
 ppi=pd.read_csv('data/BRCA/ppi_network_of_BRCA.csv')
 expression= pd.read_csv('data/BRCA/RPPA_data_of_BRCA.csv')
@@ -70,14 +67,11 @@ def Diffusion(A: sp.csr_matrix, alpha: float, eps: float):
     return T_S
 
 
-
 data= cancertype.merge(expression, left_on='patient', right_on='Sample_description')
 data.dropna()
 columns=data.columns.tolist()[3:]
 columns
 ','.join(columns)
-
-
 
 
 data1=data[columns]
@@ -92,7 +86,6 @@ for i in range(0,len(ppi)):
     correlation=abs(correlation)
     adjoint.loc[node1,node2]=correlation
     adjoint.loc[node2,node1]=correlation
-
 adjoint
 
 sparse_matrix1 = csr_matrix(adjoint.values)
@@ -102,7 +95,6 @@ x2=df.applymap(lambda x: 1 if x != 0 else 0)
 x2
 
 non_zero_count = (x2.fillna(0) != 0).sum().sum()
-
 
 
 labels =data["BRCA_Subtype_PAM50"]
@@ -125,8 +117,6 @@ tf.keras.utils.set_random_seed(123)
 tf.random.set_seed(123)
 
 
-
-
 xtrain= np.expand_dims(X_train, axis=2)
 print("x train",xtrain.shape)
 
@@ -137,8 +127,6 @@ adjoint1 = np.array(x2)[np.newaxis,:,:]
 adjoint2 = np.repeat(adjoint1,len(xtrain),0)
 adjoint3 = np.repeat(adjoint1,len(xtest),0)
 print("A",adjoint2.shape)
-
-
 
 best_model = tf.keras.models.load_model('your filepath/best_model.h5', custom_objects={'GATConv': GATConv})
 y_pred=best_model.predict([X_test, adjoint3])
