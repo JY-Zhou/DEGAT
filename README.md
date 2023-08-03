@@ -23,7 +23,7 @@ gat.py: This file describes a graph attention network.
 
 models.py: This file contains the overall network architecture of DEGAT, including data processing, diffusion module and graph classifier.
 
-best_model.h5:This file is our best-trained model.
+best_model.h5:This file is the best-scored model we trained.
 
 best_model.py:You can use this file to run best_model.h5.
 
