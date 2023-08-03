@@ -67,7 +67,6 @@ def Diffusion(A: sp.csr_matrix, alpha: float, eps: float):
     
     return T_S
 
-
 data= cancertype.merge(expression, left_on='patient', right_on='Sample_description')
 data.dropna()
 columns=data.columns.tolist()[3:]
@@ -126,7 +125,6 @@ def build_model():
     X_2 = Flatten()(X_1)
 
     output = Dense(5, activation='softmax')(X_2)
-
     model = Model(inputs=[X_in, A_in], outputs=output)
     return model
 
@@ -146,9 +144,7 @@ adjoint2 = np.repeat(adjoint1,len(xtrain),0)
 adjoint3 = np.repeat(adjoint1,len(xtest),0)
 print("A",adjoint2.shape)
 
-
 model.fit([xtrain, adjoint2], y_train, batch_size=32, epochs=100, validation_split=0.2)
-
 
 y_pred=model.predict([xtest, adjoint3])
 
@@ -172,4 +168,3 @@ print("F1 Score:", f1)
 
 mcc = matthews_corrcoef(y_test, y_pred)
 print("MCC:", mcc)
-
