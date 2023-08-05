@@ -29,13 +29,17 @@ best_model.py:You can use this file to run best_model.h5.
 
 sparsification_curve.py : This file shows the effect of different parameters on sparsification.
 
+requirements.txt:This file is the required environment to run these codes.
+
 ## Requirements
-- pandas: 1.3.0
-- tensorflow: 2.13.0
-- Keras 2.3.1
-- scikit-learn: 0.24.2
-- numpy: 1.21.1
-- Python 3.7
-- matplotlib 3.3.0
-- seaborn 0.12
-- scipy 1.19.2
+- pandas: 2.0.1
+- tensorflow: 2.7.0
+- Keras 2.7.0
+- scikit-learn: 1.2.2
+- numpy: 1.24.3
+- Python 3.9.13
+- matplotlib 3.7.1
+- seaborn 0.12.2
+- scipy 1.10.1
+```bash
+pip install -r requirements.txt
